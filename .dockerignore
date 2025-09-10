@@ -1,0 +1,38 @@
+# Git
+.git
+.gitignore
+
+# Node.js
+node_modules/
+dist/
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.json
+!package.json
+!tsconfig.json
+
+# Documentation
+README.md
+*.md
+
+# Test files
+test.*
+*.test.*

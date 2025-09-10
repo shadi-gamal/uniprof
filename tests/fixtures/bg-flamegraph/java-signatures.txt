@@ -1,0 +1,3 @@
+java.lang.Thread.run()V;com.example.MyApp.main([Ljava/lang/String;)V;com.example.Service.process(Ljava/lang/Object;)Ljava/lang/Object; 150
+java.lang.Thread.run()V;com.example.MyApp$Worker.doWork()Z;java.util.HashMap.get(Ljava/lang/Object;)Ljava/lang/Object; 200
+com.example.package.ClassName.methodName()V;[Lcom/example/Array;.process()V 50
