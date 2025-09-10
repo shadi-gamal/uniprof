@@ -1,0 +1,32 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "name": "io.github.indragiek/uniprof",
+  "description": "Universal CPU profiler designed for humans and AI agents",
+  "status": "active",
+  "repository": {
+    "url": "https://github.com/indragiek/uniprof",
+    "source": "github"
+  },
+  "version": "0.3.3",
+  "packages": [
+    {
+      "registry_type": "npm",
+      "registry_base_url": "https://registry.npmjs.org",
+      "identifier": "uniprof",
+      "version": "0.3.3",
+      "transport": {
+        "type": "stdio"
+      },
+      "package_arguments": [
+        {
+          "type": "positional",
+          "value": "mcp"
+        },
+        {
+          "type": "positional",
+          "value": "run"
+        }
+      ]
+    }
+  ]
+}

@@ -1,8 +1,10 @@
 {
   "name": "uniprof",
-  "version": "0.3.2",
+  "version": "0.3.3",
+  "author": "Indragie Karunaratne <i@indragie.com>",
   "description": "Universal CPU profiler designed for humans and AI agents",
   "type": "module",
+  "mcpName": "io.github.indragiek/uniprof",
   "main": "dist/index.js",
   "bin": {
     "uniprof": "./dist/index.js"
@@ -29,7 +31,6 @@
     "performance",
     "perf"
   ],
-  "author": "",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.17.5",
