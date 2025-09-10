@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import chalk from 'chalk';
-import { printError, printInfo, printSection, printSuccess } from '../utils/output-formatter.js';
+import { printError, printInfo, printSuccess } from '../utils/output-formatter.js';
 import { spawnSync } from '../utils/spawn.js';
 
 // Standard uniprof MCP server configuration
@@ -22,10 +22,6 @@ function commandExists(cmd: string): boolean {
 }
 
 export async function installToClient(client: string): Promise<void> {
-  console.log();
-  printSection(`Installing uniprof MCP server to ${client}`);
-
-  // Placeholder implementations for each client
   switch (client) {
     case 'amp':
       await installToAmp();
@@ -161,8 +157,6 @@ async function installToClaudeCode(): Promise<void> {
     if (result.exitCode === 0) {
       console.log();
       printSuccess('Successfully installed uniprof MCP server to Claude Code');
-      console.log();
-      console.log('The uniprof MCP server has been added to your Claude Code configuration.');
       console.log();
       printInfo('The MCP server will be available the next time you start Claude Code');
     } else {
@@ -650,7 +644,6 @@ async function installToZed(): Promise<void> {
 }
 
 function showManualInstructions(_client: string): void {
-  printSection('Manual Installation');
   console.log('To manually configure the uniprof MCP server:');
   console.log();
   console.log('1. Ensure uniprof is installed globally:');
