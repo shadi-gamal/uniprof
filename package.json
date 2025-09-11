@@ -1,6 +1,6 @@
 {
   "name": "uniprof",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Indragie Karunaratne <i@indragie.com>",
   "description": "Universal CPU profiler designed for humans and AI agents",
   "type": "module",
