@@ -670,7 +670,7 @@ export async function recordCommand(options: ExtendedRecordOptions, args: string
 
     if (fs.existsSync(outputPath)) {
       const stats = fs.statSync(outputPath);
-      const filePart = chalk.cyan(path.basename(outputPath));
+      const filePart = chalk.cyan(outputPath);
       const sizePart = chalk.gray(` (${(stats.size / 1024).toFixed(2)} KB)`);
       log(chalk.gray('Profile saved:'), filePart + sizePart);
 
