@@ -433,7 +433,14 @@ dotnet-trace convert ${containerOutputPath} --format Speedscope -o /workspace/pr
       containerResult.exitCode !== 130 &&
       containerResult.exitCode !== 143
     ) {
-      throw new Error(`Profiler exited with code ${containerResult.exitCode}`);
+      const { makeProfilerExitMessage } = await import('../utils/profiler-error.js');
+      throw new Error(
+        makeProfilerExitMessage(
+          containerResult.exitCode,
+          containerResult.stdout,
+          containerResult.stderr
+        )
+      );
     }
 
     // Look for the converted profile JSON from container and defer normalization

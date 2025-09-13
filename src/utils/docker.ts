@@ -491,17 +491,6 @@ export async function runContainer(
       await rm.exited;
     } catch {}
 
-    if (!options.verbose && options.captureOutput && exitCode !== 0) {
-      if (stdout) {
-        console.log('Container output:');
-        console.log(stdout);
-      }
-      if (stderr) {
-        printError('Container errors:');
-        console.error(stderr);
-      }
-    }
-
     return {
       exitCode: exitCode || 0,
       stdout: shouldCapture ? stdout : '',
