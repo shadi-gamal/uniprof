@@ -319,6 +319,14 @@ export async function runContainer(
     }
   }
 
+  // Allocate a pseudo-TTY when we're going to show output to a terminal.
+  // This enables color/TTY detection inside the container (e.g., [[ -t 1 ]]).
+  // Use TTY when stdout is inherited (visible to user) and the host stdout is a TTY.
+  const willInheritStdout = options.verbose || !options.captureOutput;
+  if (willInheritStdout && process.stdout.isTTY) {
+    createArgs.push('-t');
+  }
+
   createArgs.push(options.image, ...options.command);
 
   let stdio: any;
