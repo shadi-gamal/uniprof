@@ -377,7 +377,8 @@ export async function recordCommand(options: ExtendedRecordOptions, args: string
         process.exit(1);
       }
 
-      await pullContainerImage(platform.name, true);
+      // Pull container image with visible progress/spinner
+      await pullContainerImage(platform.name, false, !!options.verbose);
 
       if (profileSpinner) {
         profileSpinner.start();

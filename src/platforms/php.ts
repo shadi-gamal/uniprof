@@ -251,7 +251,8 @@ exec "$@"`;
       if (result.exitCode === 130 || result.exitCode === 143) {
         throw new Error('SIGINT');
       }
-      throw new Error(`Profiler exited with code ${result.exitCode}`);
+      const { makeProfilerExitMessage } = await import('../utils/profiler-error.js');
+      throw new Error(makeProfilerExitMessage(result.exitCode, result.stdout, result.stderr));
     }
 
     const containerProfilePath = path.join(cwd, 'profile.speedscope.json');

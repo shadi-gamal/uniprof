@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import chalk from 'chalk';
-import { createSpinner, printError, printInfo } from './output-formatter.js';
+import { createSpinner } from './output-formatter.js';
 import { parsePidPpidChildren } from './process-tree.js';
 import { readAll, spawn, spawnSync } from './spawn.js';
 
@@ -210,7 +210,11 @@ export function getContainerImage(platform: string): string {
   return `${REGISTRY}-${platform}:latest`;
 }
 
-export async function pullContainerImage(platform: string, quiet = false): Promise<void> {
+export async function pullContainerImage(
+  platform: string,
+  quiet = false,
+  verbose = false
+): Promise<void> {
   const image = getContainerImage(platform);
   const spinner = quiet ? null : createSpinner(`Pulling container image ${image}...`);
 
@@ -233,25 +237,19 @@ export async function pullContainerImage(platform: string, quiet = false): Promi
 
         if (hasCorrectPlatform) {
           spinner?.stop();
-          if (!quiet) {
-            printInfo(`Using existing container image: ${chalk.cyan(image)}`);
-          }
           return;
         }
       }
     } catch {}
 
     const pullProcess = spawn(['docker', 'pull', '--platform', getDockerPlatform(), image], {
-      stdout: !quiet ? 'inherit' : 'pipe',
-      stderr: !quiet ? 'inherit' : 'pipe',
+      // Stream docker output only in verbose mode; otherwise keep it quiet and show spinner
+      stdout: verbose ? 'inherit' : 'pipe',
+      stderr: verbose ? 'inherit' : 'pipe',
     });
 
     await pullProcess.exited;
     spinner?.stop();
-
-    if (!quiet) {
-      printInfo(`Successfully pulled container image: ${chalk.cyan(image)}`);
-    }
   } catch (error: any) {
     spinner?.stop();
     throw new Error(`Failed to pull container image: ${error.message}`);
@@ -317,6 +315,14 @@ export async function runContainer(
     for (const [key, value] of Object.entries(options.environment)) {
       createArgs.push('-e', `${key}=${value}`);
     }
+  }
+
+  // Allocate a pseudo-TTY when we're going to show output to a terminal.
+  // This enables color/TTY detection inside the container (e.g., [[ -t 1 ]]).
+  // Use TTY when stdout is inherited (visible to user) and the host stdout is a TTY.
+  const willInheritStdout = options.verbose || !options.captureOutput;
+  if (willInheritStdout && process.stdout.isTTY) {
+    createArgs.push('-t');
   }
 
   createArgs.push(options.image, ...options.command);
@@ -484,17 +490,6 @@ export async function runContainer(
       const rm = spawn(['docker', 'rm', '-f', containerId]);
       await rm.exited;
     } catch {}
-
-    if (!options.verbose && options.captureOutput && exitCode !== 0) {
-      if (stdout) {
-        console.log('Container output:');
-        console.log(stdout);
-      }
-      if (stderr) {
-        printError('Container errors:');
-        console.error(stderr);
-      }
-    }
 
     return {
       exitCode: exitCode || 0,

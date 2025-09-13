@@ -258,7 +258,8 @@ exit "$APP"`;
         }
         // Otherwise, profileCreated is true and we can continue
       } else {
-        throw new Error(`Profiler exited with code ${result.exitCode}`);
+        const { makeProfilerExitMessage } = await import('../utils/profiler-error.js');
+        throw new Error(makeProfilerExitMessage(result.exitCode, result.stdout, result.stderr));
       }
     }
 

@@ -346,7 +346,14 @@ exec "$@"`;
       containerResult.exitCode !== 130 &&
       containerResult.exitCode !== 143
     ) {
-      throw new Error(`Profiler exited with code ${containerResult.exitCode}`);
+      const { makeProfilerExitMessage } = await import('../utils/profiler-error.js');
+      throw new Error(
+        makeProfilerExitMessage(
+          containerResult.exitCode,
+          containerResult.stdout,
+          containerResult.stderr
+        )
+      );
     }
 
     const collapsedPath = path.join(cwd, 'profile.collapsed');
