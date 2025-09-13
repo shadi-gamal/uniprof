@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import chalk from 'chalk';
-import { createSpinner, printError } from './output-formatter.js';
+import { createSpinner } from './output-formatter.js';
 import { parsePidPpidChildren } from './process-tree.js';
 import { readAll, spawn, spawnSync } from './spawn.js';
 

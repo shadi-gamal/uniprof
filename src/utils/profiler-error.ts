@@ -1,5 +1,3 @@
-import type chalk from 'chalk';
-
 // Build a plain-text diagnostic for profiler failures that includes exit code and streams.
 // Intentionally avoid color here; callers colorize the header/error as needed.
 export function makeProfilerExitMessage(
@@ -22,4 +20,3 @@ export function makeProfilerExitMessage(
 
   return lines.join('\n');
 }
-
