@@ -2,7 +2,7 @@ import * as fs from 'node:fs';
 import * as os from 'node:os';
 import * as path from 'node:path';
 import chalk from 'chalk';
-import { createSpinner, printError, printInfo } from './output-formatter.js';
+import { createSpinner, printError } from './output-formatter.js';
 import { parsePidPpidChildren } from './process-tree.js';
 import { readAll, spawn, spawnSync } from './spawn.js';
 
@@ -210,7 +210,11 @@ export function getContainerImage(platform: string): string {
   return `${REGISTRY}-${platform}:latest`;
 }
 
-export async function pullContainerImage(platform: string, quiet = false): Promise<void> {
+export async function pullContainerImage(
+  platform: string,
+  quiet = false,
+  verbose = false
+): Promise<void> {
   const image = getContainerImage(platform);
   const spinner = quiet ? null : createSpinner(`Pulling container image ${image}...`);
 
@@ -233,25 +237,19 @@ export async function pullContainerImage(platform: string, quiet = false): Promi
 
         if (hasCorrectPlatform) {
           spinner?.stop();
-          if (!quiet) {
-            printInfo(`Using existing container image: ${chalk.cyan(image)}`);
-          }
           return;
         }
       }
     } catch {}
 
     const pullProcess = spawn(['docker', 'pull', '--platform', getDockerPlatform(), image], {
-      stdout: !quiet ? 'inherit' : 'pipe',
-      stderr: !quiet ? 'inherit' : 'pipe',
+      // Stream docker output only in verbose mode; otherwise keep it quiet and show spinner
+      stdout: verbose ? 'inherit' : 'pipe',
+      stderr: verbose ? 'inherit' : 'pipe',
     });
 
     await pullProcess.exited;
     spinner?.stop();
-
-    if (!quiet) {
-      printInfo(`Successfully pulled container image: ${chalk.cyan(image)}`);
-    }
   } catch (error: any) {
     spinner?.stop();
     throw new Error(`Failed to pull container image: ${error.message}`);
